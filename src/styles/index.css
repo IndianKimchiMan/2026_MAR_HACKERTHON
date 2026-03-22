@@ -1,0 +1,25 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* ── 사이드바 물결 그라데이션 애니메이션 ── */
+@keyframes sidebarWave {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 100% 0%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+.sidebar-wave {
+  background: linear-gradient(
+    135deg,
+    #0e4a84 0%,
+    #1a6abf 25%,
+    #3e91f7 50%,
+    #1a6abf 75%,
+    #0e4a84 100%
+  );
+  background-size: 300% 300%;
+  animation: sidebarWave 9s ease-in-out infinite;
+}
