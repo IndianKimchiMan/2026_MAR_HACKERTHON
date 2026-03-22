@@ -47,15 +47,20 @@ function getMockResponse(message: string): string {
  * - 있으면 실제 OpenAI API 호출 (Req 6.1, 6.2)
  * - async/await 비동기 방식으로 UI 블로킹 방지 (Req 6.4)
  */
-export async function sendMessage(message: string): Promise<string> {
+export async function sendMessage(message: string, profileSummary?: string): Promise<string> {
   const apiKey = import.meta.env.VITE_LLM_API_KEY;
 
   if (!apiKey) {
-    // mock 응답 반환
     return getMockResponse(message);
   }
 
-  // 실제 LLM API 호출
+  const systemPrompt = [
+    '당신은 한양대학교 학생들을 위한 AI 어시스턴트 HY-Planner입니다. 수강 신청, 학사일정, 시설 이용 등 학교 생활 전반에 대해 도움을 드립니다.',
+    profileSummary && profileSummary !== '프로필 미입력'
+      ? `\n\n[사용자 정보] ${profileSummary}`
+      : '',
+  ].join('');
+
   const response = await fetch(API_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -67,8 +72,7 @@ export async function sendMessage(message: string): Promise<string> {
       messages: [
         {
           role: 'system',
-          content:
-            '당신은 한양대학교 학생들을 위한 AI 어시스턴트 HY-Planner입니다. 수강 신청, 학사일정, 시설 이용 등 학교 생활 전반에 대해 도움을 드립니다.',
+          content: systemPrompt,
         },
         { role: 'user', content: message },
       ],

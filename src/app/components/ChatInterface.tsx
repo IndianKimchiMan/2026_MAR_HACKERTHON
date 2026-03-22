@@ -6,6 +6,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { sendMessage } from '../services/llmService';
+import { useUserProfile } from '../context/UserProfileContext';
 
 interface Message {
   id: string;
@@ -35,6 +36,7 @@ export default function ChatInterface({ userName }: ChatInterfaceProps) {
 
   const hasMessages = messages.length > 0;
   const displayName = userName || '사용자';
+  const { profileSummary } = useUserProfile();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -53,7 +55,7 @@ export default function ChatInterface({ userName }: ChatInterfaceProps) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await sendMessage(userMessage.content);
+      const response = await sendMessage(userMessage.content, profileSummary);
       setMessages((prev) => [
         ...prev,
         { id: (Date.now() + 1).toString(), role: 'assistant', content: response, timestamp: new Date() },

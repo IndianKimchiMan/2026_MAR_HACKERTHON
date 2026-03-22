@@ -87,6 +87,13 @@ const HomeIcon = () => (
   </svg>
 );
 
+const UserIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+);
+
 const ExternalLinkIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -104,8 +111,9 @@ const LogoutIcon = () => (
 );
 
 const NAV_MENU_ITEMS: NavMenuItem[] = [
-  { id: 'hy-planner',  label: 'HY-Planner',   type: 'internal', icon: <BotIcon /> },
-  { id: 'graduation',  label: '졸업사정 조회', type: 'internal', icon: <GraduationIcon /> },
+  { id: 'hy-planner',  label: 'HY-Planner',    type: 'internal', icon: <BotIcon /> },
+  { id: 'graduation',  label: '졸업사정 조회',  type: 'internal', icon: <GraduationIcon /> },
+  { id: 'profile',     label: '개인정보 설정',  type: 'internal', icon: <UserIcon /> },
   { id: 'home',        label: '한양대 홈페이지', type: 'external', url: 'https://www.hanyang.ac.kr/web/www/home', icon: <HomeIcon /> },
   { id: 'portal',      label: '학교포털',      type: 'external', url: 'https://portal.hanyang.ac.kr/sso/lgin.do', icon: <PortalIcon /> },
   { id: 'certificate', label: '증명발급',       type: 'external', url: 'https://academic.hanyang.ac.kr/%EC%A6%9D%EB%AA%85%EB%B0%9C%EA%B8%89%EC%95%88%EB%82%B4', icon: <DocumentIcon /> },
